@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+// Actions
+import * as actionCreators from "../../store/actions";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,15 +15,9 @@ import {
 
 class AuthButton extends Component {
   render() {
-    // const { user } = this.props;
-    const user = { username: "Mr Potato" };
-    let buttons = (
-      <li className="nav-item">
-        <span className="nav-link">
-          <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-        </span>
-      </li>
-    );
+    const { user } = this.props;
+    //const user = { username: "Mr Potato" };
+    let buttons;
 
     if (!user) {
       buttons = [
@@ -34,15 +32,34 @@ class AuthButton extends Component {
           </Link>
         </li>
       ];
+    } else {
+      buttons = (
+        <li className="nav-item">
+          <span className="nav-link" onClick={this.props.logout}>
+            <span className="navbar-text">{user.username}</span>
+            <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+          </span>
+        </li>
+      );
     }
 
-    return (
-      <ul className="navbar-nav ml-auto">
-        <span className="navbar-text">{user.username}</span>
-        {buttons}
-      </ul>
-    );
+    return <ul className="navbar-nav ml-auto">{buttons}</ul>;
   }
 }
 
-export default AuthButton;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(actionCreators.logout())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthButton);
