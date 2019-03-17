@@ -10,6 +10,11 @@ const channels = (state = initialState, action) => {
         ...state,
         channels: [...state.channels, action.payload]
       };
+    case actionTypes.FETCH_CHANNELS:
+      return {
+        ...state,
+        channels: action.payload
+      };
 
     default:
       return state;
