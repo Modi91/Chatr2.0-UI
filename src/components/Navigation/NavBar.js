@@ -14,6 +14,7 @@ class NavBar extends Component {
         <Link className="navbar-brand" to="/welcome">
           Chatr2.0
         </Link>
+
         <button
           className="navbar-toggler navbar-toggler-right"
           type="button"
