@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import * as actionCreators from "../store/actions";
+import { connect } from "react-redux";
+import SuperSecretPage from "./SuperSecretPage";
 class RegistationForm extends Component {
   state = {
     username: "",
@@ -11,9 +13,35 @@ class RegistationForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // submitHandler = e => {
+  //   e.preventDefault();
+  //   const type = this.props.match.url.substring(1);
+  //   if (mapDispatchToProps.dispatch(login)) {
+  //     this.props.login(this.state, this.props.history);
+  //   } else if (mapDispatchToProps.dispatch(signup)) {
+  //     this.props.signup(this.state, this.props.history);
+  //   }
+  //   console.log("[RegistrationForm.js]", type);
+  // };
   submitHandler = e => {
     e.preventDefault();
-    alert("I don't work yet");
+    const type = this.props.match.url.substring(1);
+    if (type === "login") {
+      // const mapDispatchToProps = dispatch => ({
+      //   login: (userData, history) =>
+      //     dispatch(actionCreators.login(userData, history))
+      this.props.login(this.state, this.props.history);
+
+      //this.props.login(this.state, this.props.history);
+    } else if (type === "signup") {
+      // const mapDispatchToProps = dispatch => ({
+      //   signup: (userData, history) =>
+      //     dispatch(actionCreators.signup(userData, history))
+      this.props.signup(this.state, this.props.history);
+    }
+    //this.props.signup(this.state, this.props.history);
+
+    console.log("[RegistrationForm.js]", type);
   };
 
   render() {
@@ -61,10 +89,22 @@ class RegistationForm extends Component {
               ? "register an account"
               : "login with an existing account"}
           </Link>
+          <div className="row">
+            {this.props.user ? <SuperSecretPage /> : <div />}
+          </div>
         </div>
       </div>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  login: (userData, history) =>
+    dispatch(actionCreators.login(userData, history)),
+  signup: (userData, history) =>
+    dispatch(actionCreators.signup(userData, history))
+});
 
-export default RegistationForm;
+export default connect(
+  null,
+  mapDispatchToProps
+)(RegistationForm);
