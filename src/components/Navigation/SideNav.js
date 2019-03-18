@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import * as actionCreators from "../../store/actions/index";
 import { connect } from "react-redux";
-
+import * as actionCreators from "../../store/actions/index";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,19 +15,17 @@ import {
 import ChannelNavLink from "./ChannelNavLink";
 
 class SideNav extends React.Component {
+  state = { collapsed: false };
+
   componentDidMount() {
     this.props.fetchChannels();
   }
-  state = { collapsed: false };
-
   render() {
-    // send channels here
     const channelLinks = this.props.channels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     return (
       <div>
-
         {this.props.user && (
           <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li
@@ -37,7 +33,7 @@ class SideNav extends React.Component {
               data-toggle="tooltip"
               data-placement="right"
             >
-              <Link className="nav-link heading" to="/createChannel">
+              <Link className="nav-link heading" to="/channels/create">
                 <span className="nav-link-text mr-2">Channels</span>
                 <FontAwesomeIcon icon={faPlusCircle} />
               </Link>
@@ -45,7 +41,6 @@ class SideNav extends React.Component {
             {channelLinks}
           </ul>
         )}
-
 
         <ul className="navbar-nav sidenav-toggler">
           <li className="nav-item">
@@ -68,10 +63,11 @@ class SideNav extends React.Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
-    channels: state.channels.channels,
-    user: state.auth.user
+    user: state.auth.user,
+    channels: state.channels.channels
   };
 };
 
@@ -81,9 +77,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SideNav);
-

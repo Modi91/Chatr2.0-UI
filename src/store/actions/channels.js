@@ -6,7 +6,7 @@ export const addChannel = newChannel => {
   return async dispatch => {
     try {
       const res = await axios.post(
-        "https://api-chatr.herokuapp.com/channels/",
+        "https://api-chatr.herokuapp.com/channels/create/",
         newChannel
       );
       const channel = res.data;
@@ -15,10 +15,10 @@ export const addChannel = newChannel => {
         type: actionTypes.POST_CHANNEL,
         payload: channel
       });
-    } catch (err) {
+    } catch (error) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data
+        payload: error.response.data
       });
     }
   };

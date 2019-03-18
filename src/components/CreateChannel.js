@@ -38,14 +38,16 @@ class CreateChannel extends Component {
                 placeholder="Enter name"
               />
             </Form.Group>
-            <Form.Group controlId="formGroupPassword">
-              <Form.Label>image url</Form.Label>
+            <Form.Group controlId="formGroupText">
+              <Form.Label>Owner</Form.Label>
               <Form.Control
-                name="image_url"
-                onChange={this.textChangeHandler}
+                name="owner"
+                value={this.props.user.username}
+                disabled
                 type="text"
-                placeholder="enter url"
               />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
               <Button variant="primary" type="submit">
                 ADD
               </Button>
