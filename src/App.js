@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import ChannelInterface from "./components/ChannelInterface";
 
 // Scripts
 import main from "./assets/js/main";
@@ -26,7 +27,7 @@ class App extends Component {
           <Route path="/welcome" component={Welcome} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Route path="/channels/create" component={CreateChannel} />
-
+          <Route path="/channels/:channelID" component={ChannelInterface} />
           <PrivateRoute path="/private" component={SuperSecretPage} />
 
           <Redirect to="/welcome" />

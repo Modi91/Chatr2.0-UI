@@ -15,7 +15,7 @@ class ChannelNavLink extends Component {
         data-placement="right"
         title={channel.name}
       >
-        <NavLink className="nav-link" to={`/channels/${channel.name}`}>
+        <NavLink className="nav-link" to={`/channels/${channel.id}`}>
           <FontAwesomeIcon icon={faHashtag} />
           <span className="nav-link-text"> {channel.name}</span>
         </NavLink>
