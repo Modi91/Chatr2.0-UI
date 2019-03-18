@@ -8,7 +8,6 @@ class CreateChannel extends Component {
     name: "",
     image_url: "",
     owner: ""
-    // owner: this.props.user.username
   };
 
   textChangeHandler = event =>
