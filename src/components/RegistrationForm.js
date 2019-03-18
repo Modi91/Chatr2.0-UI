@@ -43,7 +43,9 @@ class RegistationForm extends Component {
 
     console.log("[RegistrationForm.js]", type);
   };
-
+  componentDidMount() {
+    this.props.checkForExpiredToken();
+  }
   render() {
     const type = this.props.match.url.substring(1);
     return (
@@ -101,7 +103,8 @@ const mapDispatchToProps = dispatch => ({
   login: (userData, history) =>
     dispatch(actionCreators.login(userData, history)),
   signup: (userData, history) =>
-    dispatch(actionCreators.signup(userData, history))
+    dispatch(actionCreators.signup(userData, history)),
+  checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
 });
 
 export default connect(
