@@ -13,37 +13,21 @@ class RegistationForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // submitHandler = e => {
-  //   e.preventDefault();
-  //   const type = this.props.match.url.substring(1);
-  //   if (mapDispatchToProps.dispatch(login)) {
-  //     this.props.login(this.state, this.props.history);
-  //   } else if (mapDispatchToProps.dispatch(signup)) {
-  //     this.props.signup(this.state, this.props.history);
-  //   }
-  //   console.log("[RegistrationForm.js]", type);
-  // };
   submitHandler = e => {
     e.preventDefault();
     const type = this.props.match.url.substring(1);
     if (type === "login") {
-      // const mapDispatchToProps = dispatch => ({
-      //   login: (userData, history) =>
-      //     dispatch(actionCreators.login(userData, history))
       this.props.login(this.state, this.props.history);
-
-      //this.props.login(this.state, this.props.history);
     } else if (type === "signup") {
-      // const mapDispatchToProps = dispatch => ({
-      //   signup: (userData, history) =>
-      //     dispatch(actionCreators.signup(userData, history))
       this.props.signup(this.state, this.props.history);
     }
-    //this.props.signup(this.state, this.props.history);
 
     console.log("[RegistrationForm.js]", type);
   };
 
+  componentDidMount() {
+    this.props.checkForExpiredToken();
+  }
   render() {
     const type = this.props.match.url.substring(1);
     return (
@@ -98,6 +82,7 @@ class RegistationForm extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
+  checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken()),
   login: (userData, history) =>
     dispatch(actionCreators.login(userData, history)),
   signup: (userData, history) =>

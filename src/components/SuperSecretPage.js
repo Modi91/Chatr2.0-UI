@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import * as actionCreators from "../store/actions/index";
 import { connect } from "react-redux";
 class SuperSecretPage extends Component {
-  componentDidMount() {
-    this.props.fetchChannels();
-  }
   render() {
     return (
       <div>
@@ -21,7 +18,13 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SuperSecretPage);

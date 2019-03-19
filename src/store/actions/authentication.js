@@ -12,7 +12,7 @@ const instance = axios.create({
 const setAuthToken = token => {
   if (token) {
     localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = `jwt ${token}`;
+    axios.defaults.headers.common.Authorization = `JWT ${token}`;
   } else {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common.Authorization;
@@ -22,7 +22,7 @@ const setAuthToken = token => {
 export const checkForExpiredToken = () => {
   return dispatch => {
     // Get token
-    const token = localStorage.getItem("myToken");
+    const token = localStorage.getItem("token");
 
     if (token) {
       const currentTime = Date.now() / 1000;
