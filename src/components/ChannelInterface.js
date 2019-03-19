@@ -26,11 +26,14 @@ class ChannelInterface extends Component {
   };
 
   componentDidUpdate(prevState) {
-    console.log("[ChannelInterface.js prevState]", prevState);
     if (prevState.match.params.channelID != this.props.match.params.channelID) {
       const channelID = this.props.match.params.channelID;
-      this.props.fetchMessages(channelID);
+      // this.props.fetchMessages(channelID);
     }
+    let u = setInterval(
+      () => this.props.fetchMessages(this.props.match.params.channelID),
+      3000
+    );
   }
 
   render() {
@@ -38,21 +41,25 @@ class ChannelInterface extends Component {
       <MessageRow key={message.id} message={message} />
     ));
     return (
-      <div className="message-container">
-        <div className="room-info-container">
-          <div className="room-info-name">{this.props.channels.name}</div>
-        </div>
-        {messages}
-        <div className="message-field">
-          <input
-            name="message"
-            className="message-text"
-            placeholder="Type your message here..."
-            type="text"
-            onChange={this.textChangeHandler}
-          />
-          <button onClick={this.submitMessage}>SEND</button>
-        </div>
+      <div>
+        {this.props.user && (
+          <div className="message-container">
+            <div className="room-info-container">
+              <div className="room-info-name">{this.props.channels.name}</div>
+            </div>
+            {messages}
+            <div className="message-field">
+              <input
+                name="message"
+                className="message-text"
+                placeholder="Type your message here..."
+                type="text"
+                onChange={this.textChangeHandler}
+              />
+              <button onClick={this.submitMessage}>SEND</button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -60,6 +67,7 @@ class ChannelInterface extends Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.auth.user,
     messages: state.messages.messages, //list of messages {user: channel: message:"" timestamp: id:}
     channels: state.channels.channels
   };

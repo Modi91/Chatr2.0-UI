@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import ChannelInterface from "./components/ChannelInterface";
 
 // Scripts
@@ -13,10 +13,21 @@ import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import CreateChannel from "./components/CreateChannel";
+import * as actionCreators from "./store/actions";
+import { connect } from "react-redux";
 
 class App extends Component {
   componentDidMount() {
+    //call the checkForExpiredToken action here
     main();
+    this.props.checkForExpiredToken();
+    console.log("[App.js] componentDidMount");
+  }
+
+  componentDidUpdate(prevState) {
+    console.log("[App.js] prevState", prevState);
+    if (prevState.user != this.props.user) {
+    }
   }
 
   render() {
@@ -24,11 +35,12 @@ class App extends Component {
       <div className="content-wrapper">
         <NavBar />
         <Switch>
-          <Route path="/welcome" component={Welcome} />
-          <Route path="/(login|signup)" component={RegistrationForm} />
-          <Route path="/channels/create" component={CreateChannel} />
           <Route path="/channels/:channelID" component={ChannelInterface} />
+          <Route path="/channels/create" component={CreateChannel} />
+          <Route path="/(login|signup)" component={RegistrationForm} />
           <PrivateRoute path="/private" component={SuperSecretPage} />
+
+          <Route path="/welcome" component={Welcome} />
 
           <Redirect to="/welcome" />
         </Switch>
@@ -38,4 +50,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  checkForExpiredToken: () => dispatch(actionCreators.checkForExpiredToken())
+});
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
