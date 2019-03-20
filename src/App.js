@@ -35,8 +35,10 @@ class App extends Component {
       <div className="content-wrapper">
         <NavBar />
         <Switch>
-          <Route path="/channels/:channelID" component={ChannelInterface} />
+          {/* messagelist */}
           <Route path="/channels/create" component={CreateChannel} />
+
+          <Route path="/channels/:channelID" component={ChannelInterface} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <PrivateRoute path="/private" component={SuperSecretPage} />
 

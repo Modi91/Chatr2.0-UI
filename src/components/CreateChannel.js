@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actionCreaters from "../store/actions/index";
-import ChannelInterface from "./ChannelInterface";
 import { Link } from "react-router-dom";
 
 class CreateChannel extends Component {
@@ -10,7 +9,6 @@ class CreateChannel extends Component {
     name: "",
     image_url: "",
     owner: ""
-    // owner: this.props.user.username
   };
 
   textChangeHandler = event =>
@@ -18,7 +16,7 @@ class CreateChannel extends Component {
 
   submitChannel = event => {
     event.preventDefault();
-    this.props.addChannel(this.state);
+    this.props.addChannel(this.state, this.props.history);
   };
 
   render() {
@@ -50,11 +48,10 @@ class CreateChannel extends Component {
                     type="text"
                     placeholder="enter url"
                   />
-                  <Link to="/private">
-                    <Button variant="primary" type="submit">
-                      ADD
-                    </Button>
-                  </Link>
+
+                  <Button variant="primary" type="submit">
+                    ADD
+                  </Button>
                 </Form.Group>
               </Form>
             </Card.Body>
@@ -67,7 +64,8 @@ class CreateChannel extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addChannel: newChannel => dispatch(actionCreaters.addChannel(newChannel))
+    addChannel: (newChannel, history) =>
+      dispatch(actionCreaters.addChannel(newChannel, history))
   };
 };
 

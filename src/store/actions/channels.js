@@ -2,23 +2,24 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { setErrors } from "./errors";
 
-export const addChannel = newChannel => {
+export const addChannel = (newChannel, history) => {
   return async dispatch => {
     try {
       const res = await axios.post(
-        "https://api-chatr.herokuapp.com/channels/",
+        "https://api-chatr.herokuapp.com/channels/create/",
         newChannel
       );
       const channel = res.data;
-      dispatch(setErrors());
+      dispatch(setErrors({}));
       dispatch({
         type: actionTypes.POST_CHANNEL,
         payload: channel
       });
-    } catch (err) {
+      history.push("/private/");
+    } catch (error) {
       dispatch({
         type: actionTypes.SET_ERRORS,
-        payload: err.response.data
+        payload: error.response.data
       });
     }
   };
