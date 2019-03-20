@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Welcome extends Component {
   render() {
@@ -20,4 +21,13 @@ class Welcome extends Component {
   }
 }
 
-export default Welcome;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Welcome);

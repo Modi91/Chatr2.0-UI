@@ -11,6 +11,11 @@ class ChannelInterface extends Component {
     timestamp: ""
   };
 
+  updateMessage = setInterval(
+    () => this.props.fetchMessages(this.props.match.params.channelID),
+    3000
+  );
+
   componentDidMount() {
     const channelID = this.props.match.params.channelID;
     this.props.fetchMessages(channelID);
@@ -27,13 +32,12 @@ class ChannelInterface extends Component {
 
   componentDidUpdate(prevState) {
     if (prevState.match.params.channelID != this.props.match.params.channelID) {
-      const channelID = this.props.match.params.channelID;
-      // this.props.fetchMessages(channelID);
+      return this.updateMessage;
     }
-    let u = setInterval(
-      () => this.props.fetchMessages(this.props.match.params.channelID),
-      3000
-    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.updateMessage);
   }
 
   render() {
@@ -56,7 +60,7 @@ class ChannelInterface extends Component {
                 type="text"
                 onChange={this.textChangeHandler}
               />
-              <button onClick={this.submitMessage}>SEND</button>
+              <button onClick={this.submitMessage.bind(this)}>SEND</button>
             </div>
           </div>
         )}
