@@ -11,9 +11,11 @@ class Welcome extends Component {
           <h3 className="mb-5">
             <em>You're gonna need to login to see the messages</em>
           </h3>
-          <Link to="/login" className="btn btn-primary btn-lg">
-            Login
-          </Link>
+          {!this.props.user && (
+            <Link to="/login" className="btn btn-primary btn-lg">
+              Login
+            </Link>
+          )}
         </div>
         <div className="overlay z-0" />
       </header>

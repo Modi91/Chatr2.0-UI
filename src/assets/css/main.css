@@ -5,7 +5,6 @@ html {
 
 body {
   overflow-x: hidden;
-  height: 100%;
 }
 
 body.sticky-footer {
@@ -104,7 +103,7 @@ body.fixed-nav {
   text-decoration: none;
 }
 
-#mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level > li > a {
+#mainNav .navbar-collapse .sidenav-second-level > li > a {
   padding-left: 1em;
 }
 
@@ -688,18 +687,13 @@ footer.sticky-footer {
 
 .message-container {
   position: center;
-  width: calc(100% - 0px);
-  height: 100%;
+  width: calc(100% - 40px);
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
-}
-
-.message-log {
-  overflow-y: auto;
-  padding: 20px;
-  height: 80%;
+  overflow: auto;
 }
 
 .message-item {
@@ -713,10 +707,6 @@ footer.sticky-footer {
   justify-content: flex-end;
   flex-direction: row;
   align-items: center;
-}
-
-.active-author {
-  text-align: right;
 }
 
 .active-message {
@@ -818,16 +808,6 @@ footer.sticky-footer {
   background-color: #cc1433;
 }
 
-.room-list {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-}
-
 .room {
   width: 100%;
   padding-left: 20px;
@@ -892,11 +872,12 @@ footer.sticky-footer {
   margin-right: 3px;
 }
 
-#exampleAccordion {
+#exampleAccordion1 {
   transition: all 0.1s ease-out;
+  overflow-y: scroll;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  position: absolute;
+  position: relative;
   top: 64px;
   bottom: 0;
 }
