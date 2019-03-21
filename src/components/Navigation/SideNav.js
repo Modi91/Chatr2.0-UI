@@ -32,7 +32,7 @@ class SideNav extends React.Component {
     return (
       <div>
         {this.props.user && (
-          <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
+          <ul className="navbar-nav navbar-sidenav" id="exampleAccordion1">
             <li
               className="nav-item"
               data-toggle="tooltip"

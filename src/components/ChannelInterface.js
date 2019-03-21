@@ -82,9 +82,7 @@ class ChannelInterface extends Component {
       <div>
         {this.props.user && (
           <div className="message-container">
-            <div className="room-info-container">
-              <div className="room-info-name">{this.props.channels.name}</div>
-            </div>
+            <div className="room-info-container" />
             {messages}
             <div className="message-field">
               <input
