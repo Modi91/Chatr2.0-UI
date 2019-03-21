@@ -5,6 +5,7 @@ html {
 
 body {
   overflow-x: hidden;
+  height: 100%;
 }
 
 body.sticky-footer {
@@ -889,4 +890,13 @@ footer.sticky-footer {
   font-size: 10px;
   color: #3adc3a;
   margin-right: 3px;
+}
+
+#exampleAccordion {
+  transition: all 0.1s ease-out;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
 }

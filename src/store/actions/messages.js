@@ -5,24 +5,12 @@ import { setErrors } from "./errors";
 export const addMessage = (channelID, m) => {
   return async dispatch => {
     try {
-      const res = await axios.post(
+      await axios.post(
         `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
-        m
+        { message: m.message }
       );
-      const message = res.data;
-      dispatch(setErrors({}));
-      dispatch({
-        type: actionTypes.POST_MESSAGES,
-        payload: message
-      });
     } catch (error) {
-      console.error(error);
-      if (error.response) {
-        dispatch({
-          type: actionTypes.SET_ERRORS,
-          payload: error.response.data
-        });
-      }
+      setErrors(error);
     }
   };
 };
@@ -39,8 +27,7 @@ export const fetchMessages = channelID => {
         payload: messages
       });
     } catch (error) {
-      console.error("Something went wrong");
-      console.error(error);
+      setErrors(error);
     }
   };
 };
@@ -60,8 +47,7 @@ export const fetchMessagesTS = (channelID, ts) => {
         payload: message
       });
     } catch (error) {
-      console.error("Something went wrong");
-      console.error(error);
+      setErrors(error);
     }
   };
 };
