@@ -7,8 +7,8 @@ const messages = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.POST_MESSAGES:
       return {
-        ...state,
-        messages: [...state.messages, action.payload]
+        ...state
+        // messages: [...state.messages, action.payload]
       };
     case actionTypes.FETCH_MESSAGES:
       return {
@@ -22,7 +22,7 @@ const messages = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          messages: [...state.messages, action.payload]
+          messages: state.messages.concat(action.payload)
         };
       }
 

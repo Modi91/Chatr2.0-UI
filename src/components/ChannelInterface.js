@@ -14,19 +14,21 @@ class ChannelInterface extends Component {
   updateMessage = 0;
 
   async componentDidMount() {
-    const channelID = this.props.match.params.channelID;
-    await this.props.fetchMessages(channelID);
-    // let latestMessageTS = this.props.messages[this.props.messages.length - 1]
-    //   .timestamp;
-    if (this.props.messages.length !== 0) {
-      this.updateMessage = setInterval(
-        () =>
-          this.props.fetchMessagesTS(
-            channelID,
-            this.props.messages[this.props.messages.length - 1].timestamp
-          ),
-        3000
-      );
+    if (this.props.user) {
+      const channelID = this.props.match.params.channelID;
+      await this.props.fetchMessages(channelID);
+      // let latestMessageTS = this.props.messages[this.props.messages.length - 1]
+      //   .timestamp;
+      if (this.props.messages.length !== 0) {
+        this.updateMessage = setInterval(
+          () =>
+            this.props.fetchMessagesTS(
+              channelID,
+              this.props.messages[this.props.messages.length - 1].timestamp
+            ),
+          3000
+        );
+      }
     }
   }
 
@@ -65,7 +67,6 @@ class ChannelInterface extends Component {
           3000
         );
       }
-    } else {
     }
   }
 
