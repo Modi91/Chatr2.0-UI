@@ -26,7 +26,7 @@ class App extends Component {
 
   componentDidUpdate(prevState) {
     console.log("[App.js] prevState", prevState);
-    if (prevState.user != this.props.user) {
+    if (prevState.user !== this.props.user) {
     }
   }
 

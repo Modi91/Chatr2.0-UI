@@ -34,10 +34,30 @@ export const fetchMessages = channelID => {
         `https://api-chatr.herokuapp.com/channels/${channelID}`
       );
       const messages = res.data;
-      console.log(messages);
       dispatch({
         type: actionTypes.FETCH_MESSAGES,
         payload: messages
+      });
+    } catch (error) {
+      console.error("Something went wrong");
+      console.error(error);
+    }
+  };
+};
+
+export const fetchMessagesTS = (channelID, ts) => {
+  console.log("[actions/messages.js] ts:", ts);
+
+  return async dispatch => {
+    try {
+      const res = await axios.get(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/?latest=${ts}`
+      );
+      const message = res.data;
+
+      dispatch({
+        type: actionTypes.FETCH_MESSAGES_TS,
+        payload: message
       });
     } catch (error) {
       console.error("Something went wrong");

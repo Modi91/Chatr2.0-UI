@@ -10,8 +10,7 @@ class MessageRow extends Component {
           </div>
           <div className="active-author message-author">
             {this.props.message.username}
-            {`  ${this.props.message.timestamp.slice(11, 16)}`}
-            {/* {(this.props.message.timestamp).from(Date.now())} */}
+            {this.props.message.timestamp}
           </div>
         </div>
       </div>

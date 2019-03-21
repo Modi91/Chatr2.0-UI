@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actionCreaters from "../store/actions/index";
-import { Link } from "react-router-dom";
 
 class CreateChannel extends Component {
   state = {

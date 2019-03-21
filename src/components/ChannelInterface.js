@@ -11,14 +11,23 @@ class ChannelInterface extends Component {
     timestamp: ""
   };
 
-  updateMessage = setInterval(
-    () => this.props.fetchMessages(this.props.match.params.channelID),
-    3000
-  );
+  updateMessage = 0;
 
-  componentDidMount() {
+  async componentDidMount() {
     const channelID = this.props.match.params.channelID;
-    this.props.fetchMessages(channelID);
+    await this.props.fetchMessages(channelID);
+    // let latestMessageTS = this.props.messages[this.props.messages.length - 1]
+    //   .timestamp;
+    if (this.props.messages.length !== 0) {
+      this.updateMessage = setInterval(
+        () =>
+          this.props.fetchMessagesTS(
+            channelID,
+            this.props.messages[this.props.messages.length - 1].timestamp
+          ),
+        3000
+      );
+    }
   }
 
   textChangeHandler = event =>
@@ -28,11 +37,35 @@ class ChannelInterface extends Component {
     const channelID = this.props.match.params.channelID;
 
     this.props.addMessage(channelID, this.state);
+    this.setState({ message: "" });
   };
 
-  componentDidUpdate(prevState) {
-    if (prevState.match.params.channelID != this.props.match.params.channelID) {
-      return this.updateMessage;
+  async componentDidUpdate(prevState) {
+    const channelID = this.props.match.params.channelID;
+    // let latestMessageTS = this.props.messages[this.props.messages.length - 1]
+    //   .timestamp;
+    if (
+      prevState.match.params.channelID !== this.props.match.params.channelID
+    ) {
+      await clearInterval(this.updateMessage);
+      await this.props.fetchMessages(channelID);
+      if (this.props.messages.length !== 0) {
+        await clearInterval(this.updateMessage);
+        this.updateMessage = setInterval(
+          () =>
+            this.props.fetchMessagesTS(
+              channelID,
+              this.props.messages[this.props.messages.length - 1].timestamp
+            ),
+          3000
+        );
+      } else {
+        this.updateMessage = setInterval(
+          () => this.props.fetchMessages(channelID),
+          3000
+        );
+      }
+    } else {
     }
   }
 
@@ -82,7 +115,9 @@ const mapDispatchToProps = dispatch => {
     fetchMessages: channelID =>
       dispatch(actionCreators.fetchMessages(channelID)),
     addMessage: (channelID, m) =>
-      dispatch(actionCreators.addMessage(channelID, m))
+      dispatch(actionCreators.addMessage(channelID, m)),
+    fetchMessagesTS: (channelID, ts) =>
+      dispatch(actionCreators.fetchMessagesTS(channelID, ts))
   };
 };
 
