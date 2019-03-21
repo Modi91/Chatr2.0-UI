@@ -21,7 +21,7 @@ class SideNav extends React.Component {
     this.props.fetchChannels();
   }
   componentDidUpdate(prevState) {
-    if (this.props.user != prevState.user) {
+    if (this.props.user !== prevState.user) {
       this.props.fetchChannels();
     }
   }

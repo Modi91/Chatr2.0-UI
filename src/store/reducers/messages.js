@@ -15,6 +15,16 @@ const messages = (state = initialState, action) => {
         ...state,
         messages: action.payload
       };
+    case actionTypes.FETCH_MESSAGES_TS:
+      if (action.payload.length === 0) {
+        //if(empty array), do not change the state
+        return { ...state };
+      } else {
+        return {
+          ...state,
+          messages: [...state.messages, action.payload]
+        };
+      }
 
     default:
       return state;
