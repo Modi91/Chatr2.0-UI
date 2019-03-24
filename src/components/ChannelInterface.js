@@ -13,12 +13,12 @@ class ChannelInterface extends Component {
 
   updateMessage = 0;
 
+  componentWillMount() {}
   async componentDidMount() {
     if (this.props.user) {
       const channelID = this.props.match.params.channelID;
       await this.props.fetchMessages(channelID);
-      // let latestMessageTS = this.props.messages[this.props.messages.length - 1]
-      //   .timestamp;
+
       if (this.props.messages.length !== 0) {
         this.updateMessage = setInterval(
           () =>
@@ -35,17 +35,17 @@ class ChannelInterface extends Component {
   textChangeHandler = event =>
     this.setState({ [event.target.name]: event.target.value });
 
-  submitMessage = () => {
+  submitMessage = e => {
     const channelID = this.props.match.params.channelID;
-
-    this.props.addMessage(channelID, this.state);
-    this.setState({ message: "" });
+    if (e.key === "Enter") {
+      this.props.addMessage(channelID, this.state);
+      this.setState({ message: "" });
+    }
   };
 
   async componentDidUpdate(prevState) {
     const channelID = this.props.match.params.channelID;
-    // let latestMessageTS = this.props.messages[this.props.messages.length - 1]
-    //   .timestamp;
+
     if (
       prevState.match.params.channelID !== this.props.match.params.channelID
     ) {
@@ -61,6 +61,13 @@ class ChannelInterface extends Component {
             ),
           3000
         );
+        ///ADD-ME///ADD-ME///ADD-ME///ADD-ME///ADD-ME///ADD-ME///ADD-ME///
+        this.currentChannelName = this.props.channels
+          .filter(channel => channel.id === this.props.messages[0].channel)
+          .map(channel => channel.name);
+
+        console.log(this.currentChannelName);
+        ///ADD-ME///ADD-ME///ADD-ME///ADD-ME///ADD-ME///ADD-ME///ADD-ME///
       } else {
         this.updateMessage = setInterval(
           () => this.props.fetchMessages(channelID),
@@ -78,21 +85,23 @@ class ChannelInterface extends Component {
     const messages = this.props.messages.map(message => (
       <MessageRow key={message.id} message={message} />
     ));
+
     return (
       <div>
         {this.props.user && (
           <div className="message-container">
-            <div className="room-info-container" />
             {messages}
+
             <div className="message-field">
               <input
                 name="message"
                 className="message-text"
-                placeholder="Type your message here..."
+                placeholder="Type here..."
                 type="text"
+                value={this.state.message}
                 onChange={this.textChangeHandler}
+                onKeyPress={this.submitMessage.bind(this)}
               />
-              <button onClick={this.submitMessage.bind(this)}>SEND</button>
             </div>
           </div>
         )}
