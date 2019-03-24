@@ -20,23 +20,19 @@ class CreateChannel extends Component {
 
   render() {
     return (
-      <div>
+      <div id="create">
         {this.props.user && (
-          <Card style={{ width: "18rem" }}>
-            <Card.Img
-              variant="top"
-              src="https://s3-eu-west-1.amazonaws.com/userlike-cdn-blog/benefits-of-live-chat/chat-benefits.png"
-            />
+          <Card id="createCard" style={{ width: "18rem" }}>
             <Card.Body>
-              <Card.Title>Create New Channel</Card.Title>
+              <Card.Title>Create a New Channel</Card.Title>
               <Form onSubmit={this.submitChannel}>
                 <Form.Group controlId="formGroupText">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Channel Name</Form.Label>
                   <Form.Control
                     name="name"
                     onChange={this.textChangeHandler}
                     type="text"
-                    placeholder="Enter name"
+                    placeholder="Enter channel name"
                   />
                 </Form.Group>
                 <Form.Group controlId="formGroupPassword">
@@ -45,10 +41,15 @@ class CreateChannel extends Component {
                     name="image_url"
                     onChange={this.textChangeHandler}
                     type="text"
-                    placeholder="enter url"
+                    placeholder="image url"
                   />
 
-                  <Button variant="primary" type="submit">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    style={{ marginTop: "10px" }}
+                    id="button"
+                  >
                     ADD
                   </Button>
                 </Form.Group>

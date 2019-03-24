@@ -31,7 +31,7 @@ class RegistationForm extends Component {
   render() {
     const type = this.props.match.url.substring(1);
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
+      <div className="card col-6 mx-auto p-0 mt-5" id="createCard">
         <div className="card-body">
           <h5 className="card-title mb-4">
             {type === "login"
@@ -59,6 +59,7 @@ class RegistationForm extends Component {
             </div>
             <input
               className="btn btn-primary"
+              id="button"
               type="submit"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
@@ -68,6 +69,7 @@ class RegistationForm extends Component {
           <Link
             to={type === "login" ? "/signup" : "/login"}
             className="btn btn-small btn-link"
+            id="button"
           >
             {type === "login"
               ? "register an account"

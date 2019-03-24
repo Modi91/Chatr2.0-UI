@@ -13,6 +13,7 @@ body.sticky-footer {
 
 body.sticky-footer .content-wrapper {
   min-height: calc(100vh - 56px - 56px);
+  background-image: url("./pic2.jpg");
 }
 
 body.fixed-nav {
@@ -69,6 +70,8 @@ body.fixed-nav {
 #mainNav .navbar-collapse {
   overflow: auto;
   max-height: 75vh;
+
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
@@ -660,7 +663,7 @@ footer.sticky-footer {
   bottom: 0;
   width: 100%;
   height: 56px;
-  background-color: #e9ecef;
+  background-color: rgba(49, 97, 141, 0.575) !important;
   line-height: 55px;
 }
 
@@ -686,23 +689,32 @@ footer.sticky-footer {
 }
 
 .message-container {
-  position: center;
-  width: calc(100% - 40px);
-  height: 50%;
+  position: left;
+  width: calc(100% - 0px);
+  /* here */
+  height: 700px;
   display: flex;
+  margin-top: 0px;
+  margin-left: 0px;
   flex-direction: column;
   justify-content: space-between;
-  background-color: white;
-  overflow: auto;
+
+  /* here */
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-image: url("./pic2.jpg");
 }
 
 .message-item {
   margin-top: 20px;
+  /* here */
+  padding: 45px;
+  position: left;
 }
 
 .active {
   margin-top: 20px;
-  margin-left: 100px;
+  margin-left: 0px;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
@@ -712,29 +724,33 @@ footer.sticky-footer {
 .active-message {
   background-color: #3cb371 !important;
   color: white !important;
+  width: 200px;
+  position: right;
+  margin-top: 10px;
 }
 
 .author-message-container {
   display: inline-block;
-  max-width: 50%;
+  max-width: 200%;
 }
 
 .message {
   display: inline-block;
-  font-family: "Lato", sans-serif;
+
+  font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: 100%;
   color: #2c2d30;
-  background-color: white;
+  background-color: rgba(49, 97, 141, 0.575) !important;
   border-radius: 20px;
   padding: 15px;
   width: auto;
-  text-align: center;
 }
 
 .message-author {
-  font-family: "Lato", sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: 13px;
-  color: black;
+  color: rgb(201, 194, 194);
+  text-align: right;
   font-weight: bolder;
   margin-top: 5px;
   display: block;
@@ -743,9 +759,12 @@ footer.sticky-footer {
 
 .message-field {
   height: auto;
-  padding: 10px;
-  background-color: white;
-  border-top: 1px solid #e4e4e4;
+  width: 600px;
+  padding: 0px;
+  border-top: rgb(45, 64, 82) !important;
+  /* here */
+  margin-top: 650px;
+  position: fixed;
 }
 
 .message-text {
@@ -758,6 +777,7 @@ footer.sticky-footer {
   font-family: "Lato", sans-serif;
   align-self: center;
   outline-width: 0;
+  background-color: rgba(45, 64, 82, 0.363) !important;
 }
 
 .message-button:hover {
@@ -766,15 +786,16 @@ footer.sticky-footer {
 }
 
 .room-info-container {
-  border-top: 0px solid #e8e8e8;
-  border-bottom: 0px solid #e8e8e8;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0px;
+  padding: 5px;
   background-color: white;
+  height: 50px;
 }
 
 .user-list {
@@ -791,15 +812,6 @@ footer.sticky-footer {
   font-family: "Lato", sans-serif;
   color: #767171;
   font-size: 12px;
-}
-
-.room-info-name {
-  margin-top: 10px;
-  text-align: bottom;
-  font-family: "Lato", sans-serif;
-  color: black;
-  font-size: 20px;
-  margin-bottom: 10px;
 }
 
 #directory {
@@ -821,13 +833,6 @@ footer.sticky-footer {
 .room:hover {
   background-color: #a30e27;
   cursor: pointer;
-}
-
-.room-name {
-  font-family: "Lato", sans-serif;
-  color: white;
-  font-size: 16px;
-  padding-left: 10px;
 }
 
 .room-title {
@@ -880,4 +885,76 @@ footer.sticky-footer {
   position: relative;
   top: 64px;
   bottom: 0;
+  background-color: rgb(45, 64, 82) !important;
+}
+.navImage {
+  border-radius: 50%;
+}
+
+.active {
+  color: red;
+}
+
+#secret {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  padding: 2%;
+  color: white;
+  position: center;
+  text-align: center;
+  margin-top: 0px;
+  text-align: center;
+  height: 700px;
+  background-image: url("./pic2.jpg");
+}
+#createCard {
+  margin: auto;
+  margin-top: 0px;
+  padding: 20px;
+  padding-top: 60px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  height: 400px;
+  width: 500px;
+  color: white;
+  background-color: rgba(45, 64, 82, 0.52) !important;
+}
+
+#create {
+  margin: auto;
+  margin-top: 0px;
+  padding: 20px;
+  padding-top: 70px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  height: 700px;
+  width: 800px;
+  background-image: url("./pic2.jpg");
+}
+
+#register {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.mb-1 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  padding: 2%;
+  position: center;
+  margin-top: 250px;
+  text-align: center;
+}
+
+#mainNav {
+  background-color: rgb(45, 64, 82) !important;
+}
+
+.nav-item {
+  background-color: rgb(45, 64, 82) !important;
+}
+
+#chat {
+  margin-top: 300px;
+}
+
+#button {
+  background-color: rgba(115, 223, 53, 0.5);
+  border: 0px;
+  color: white;
 }
